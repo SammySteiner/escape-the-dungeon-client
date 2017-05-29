@@ -4,7 +4,7 @@ import BoardSquare from './BoardSquare'
 export default ( props ) => {
   let squares = []
   for (var i=0; i < props.size; i++){
-    squares.push(<BoardSquare cell={props.boardArr[i]} size={props.size}/>)
+    squares.push(<BoardSquare key={i} cell={props.boardArr[i]} size={props.size}/>)
   }
   return (
     <div className='row'>

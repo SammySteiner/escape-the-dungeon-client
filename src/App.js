@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
+
 import BoardContainer from './BoardContainer'
-import { Link } from 'react-router-dom'
+import NavBar from './NavBar'
+import Welcome from './Welcome'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className='navbar navbar-inverse'>
-          <div className='container-fluid'>
-            <div className='navbar-header'>
-              <a className='navbar-brand'>
-                Welcome to the Dungeon
-              </a>
-            </div>
+        <NavBar />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path='/' component={Welcome}/>
+            <Route path="/:name" render={( { match } ) =>
+            {return <BoardContainer name={match.params.name}/>}}/>
+          </Switch>
+        </BrowserRouter>
 
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav">
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <BoardContainer />
       </div>
     );
   }

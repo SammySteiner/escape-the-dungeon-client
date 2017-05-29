@@ -1,65 +1,51 @@
 import React, { Component } from 'react'
 import Board from './Board'
 
+import { showBoard } from './api'
+
 export default class BoardContainer extends Component {
-  constructor() {
+  constructor( props ) {
     super()
-    this.state = {
-      size: '2',
-      name: 'test',
-      player: {
-        x: 1,
-        y: 2,
-        key: false,
-        hearts: 1
-        },
-      key: {
-        x: 2,
-        y: 1,
-        available: false
-      },
-      door: {
-        x: 1,
-        y: 1
-      },
-      monsters: [
-        {
-          id: 1,
-          x: 2,
-          y: 2
-        }
-      ]
-    }
+  }
+
+  componentDidMount(){
+    showBoard(this.props.name)
+    .then( (data) => {
+      return this.setState({board: data})
+    })
   }
 
   createBoard() {
-    const numberOfRows = this.state.size
-    const numberOfSquares = this.state.size * this.state.size
-    const boardArr = []
-    for (var i=0; i < numberOfRows; i++) {
-      boardArr.push([])
-    }
-    boardArr.forEach(function(row){
+    if (this.state && this.state.board !== null)
+    {
+      const numberOfRows = this.state.board.size
+      const boardArr = []
       for (var i=0; i < numberOfRows; i++) {
-        row.push(['empty'])
+        boardArr.push([])
       }
-    })
-    boardArr[this.state.player.x - 1][this.state.player.y - 1] = 'player'
-    boardArr[this.state.key.x - 1][this.state.key.y - 1] = 'key'
-    boardArr[this.state.door.x - 1][this.state.door.y - 1] = 'door'
-    this.state.monsters.forEach(function(monster){
-      boardArr[monster.x - 1][monster.y - 1] = 'monster'
-    })
-    return boardArr
+      boardArr.forEach(function(row){
+        for (var i=0; i < numberOfRows; i++) {
+          row.push(['empty'])
+        }
+      })
+      boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = 'player'
+      boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = 'key'
+      boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = 'door'
+      this.state.board.monsters.forEach(function(monster){
+        boardArr[monster.x - 1][monster.y - 1] = 'monster'
+      })
+      return boardArr
+    }
   }
 
 
   render() {
     const boardArr = this.createBoard()
+    console.log('rendered');
     return (
       <div className="container-fluid">
-        {this.state.name}
-        <Board boardArr={boardArr} size={this.state.size}/>
+        {this.state && this.state.board !== null ? this.state.board.name : 'Loading'}
+        {this.state && this.state.board !== null ? <Board boardArr={boardArr} size={this.state.board.size}/> : <h1>Loading</h1>}
       </div>
 
     )
