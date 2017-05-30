@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
-
-import BoardContainer from './BoardContainer'
+import React, { Component } from 'react'
+import { BrowserRouter, Route } from 'react-router-dom'
 import NavBar from './NavBar'
-import Welcome from './Welcome'
+import HomeContainer from './home/container/HomeContainer'
 
 class App extends Component {
   render() {
@@ -11,13 +9,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <BrowserRouter>
-          <Switch>
-            <Route exact path='/' component={Welcome}/>
-            <Route path="/:name" render={( { match } ) =>
-            {return <BoardContainer name={match.params.name}/>}}/>
-          </Switch>
+          <Route path='/' render={ ( { history } ) => <HomeContainer history={history}/> }/>
         </BrowserRouter>
-
       </div>
     );
   }
