@@ -25,7 +25,7 @@ export default class BoardContainer extends Component {
       }
       boardArr.forEach(function(row){
         for (var i=0; i < numberOfRows; i++) {
-          row.push(['empty'])
+          row.push([''])
         }
       })
       boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = 'player'

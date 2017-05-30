@@ -7,6 +7,7 @@ export default class Welcome extends Component {
     super()
     this.state = {
       name: '',
+      size: '',
       select: '',
       boards: []
     }
@@ -17,16 +18,22 @@ export default class Welcome extends Component {
     .then( data => this.setState({ boards: data }))
   }
 
-  handleInputChange(e){
+  handleNameInputChange(e){
     this.setState({
       name: e.target.value
+    })
+  }
+
+  handleSizeInputChange(e){
+    this.setState({
+      size: e.target.value
     })
   }
 
   handleCreateSubmit(e){
     e.preventDefault()
     const name = this.state.name
-    createBoard(this.state.name)
+    createBoard(this.state.name, this.state.size)
     .then(() => this.props.history.push('/' + name ))
   }
 
@@ -55,7 +62,11 @@ export default class Welcome extends Component {
             <form onSubmit={this.handleCreateSubmit.bind(this)}>
               <label>Dungeon Name:</label>
               <div className="form-group">
-                <input type='text' value={this.state.name} onChange={this.handleInputChange.bind(this)}/>
+                <input type='text' value={this.state.name} onChange={this.handleNameInputChange.bind(this)}/>
+              </div>
+              <label>Dungeon Size:</label>
+              <div className="form-group">
+                <input type='text' value={this.state.size} onChange={this.handleSizeInputChange.bind(this)}/>
               </div>
               <button className="btn btn-default" type='submit'>Build Dungeon</button>
             </form>
@@ -68,10 +79,11 @@ export default class Welcome extends Component {
                 <select onChange={this.handleSelect.bind(this)}
                   className="form-control"
                   value={this.state.select}>
+                  <option>Choose from the list</option>
                   {boardList}
                 </select>
               </div>
-              <button className="btn btn-default" type='submit'>Continue Dungeon</button>
+              {this.state.select ? <button className="btn btn-default" type='submit'>Continue Dungeon</button> : ''}
             </form>
           </div>
         </div>
