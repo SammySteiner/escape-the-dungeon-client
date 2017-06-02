@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Board from '../components/Board'
 
-import { showBoard } from '../../api'
+import { showBoard, updateBoard } from '../../api'
 
 export default class BoardContainer extends Component {
   constructor( props ) {
@@ -39,9 +39,32 @@ export default class BoardContainer extends Component {
   handleClick(){
     if (this.validMove()){
       return this.setState( (prevState) => {
-        Object.assign({}, prevState.board, prevState.board.player.x = this.state.hover[0], prevState.board.player.y = this.state.hover[1], prevState.hover = '', prevState.shading = '')
-      })
+        Object.assign({}, prevState.board, prevState.board.player.x = this.state.hover[0], prevState.board.player.y = this.state.hover[1], prevState.board.monsters = this.moveMonsters(this.state.board.monsters), prevState.hover = '', prevState.shading = '')
+      }, () => updateBoard(this.state.board))
     }
+  }
+
+  moveMonsters(monsterArr){
+    return monsterArr.map(monster => this.moveMonster(monster))
+  }
+
+  moveMonster(monster){
+    if ( parseInt(Math.random()*100, 10) > 50 ) {
+      if ( monster.x === 1 ) { monster.x += 1 }
+      else if (monster.x === this.state.board.size ) { monster.x -= 1 }
+      else {
+        if ( parseInt(Math.random()*100, 10) > 50 ) { monster.x += 1}
+        else { monster.x -= 1 }
+      }
+    } else {
+      if ( monster.y === 1 ) { monster.y += 1 }
+      else if (monster.y === this.state.board.size ) { monster.y -= 1 }
+      else  {
+        if ( parseInt(Math.random()*100, 10) > 50 ) { monster.y += 1}
+        else { monster.y -= 1 }
+      }
+    }
+    return monster
   }
 
   createBoard() {
