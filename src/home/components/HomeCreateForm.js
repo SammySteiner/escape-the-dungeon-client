@@ -13,6 +13,10 @@ export default ( props ) => {
         <div className="form-group">
           <input type='text' value={props.size} onChange={props.onSizeChange}/>
         </div>
+        <label>Number of Monsters:</label>
+        <div className="form-group">
+          <input type='number' value={props.monsters} onChange={props.onMonstersChange}/>
+        </div>
         <button className="btn btn-default" type='submit'>Build Dungeon</button>
       </form>
     </div>

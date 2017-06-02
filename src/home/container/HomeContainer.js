@@ -6,6 +6,7 @@ import HomeMessage from '../components/HomeMessage'
 import HomeCreateForm from '../components/HomeCreateForm'
 import HomeSelectForm from '../components/HomeSelectForm'
 import BoardContainer from '../../board/container/BoardContainer'
+import EndGameContainer from '../../endGame/containers/EndGameContainer'
 
 export default class HomeContainer extends Component {
   constructor(){
@@ -13,6 +14,7 @@ export default class HomeContainer extends Component {
     this.state = {
       name: '',
       size: '',
+      monsters: 0,
       select: '',
       boards: []
     }
@@ -35,11 +37,20 @@ export default class HomeContainer extends Component {
     })
   }
 
+  handleMonstersInputChange(e){
+    this.setState({
+      monsters: e.target.value
+    })
+  }
+
   handleCreateSubmit(e){
     e.preventDefault()
     const name = this.state.name
-    createBoard(this.state.name, this.state.size)
-    .then(() => this.props.history.push('/' + name ))
+    createBoard(this.state.name, this.state.size, this.state.monsters)
+    .then(() => {
+      this.props.history.push('/' + name )
+      return this.setState({name: '', size: '', monsters: 0, select: ''})
+    })
   }
 
   handleSelect(e){
@@ -53,11 +64,15 @@ export default class HomeContainer extends Component {
     this.props.history.push('/' + this.state.select )
   }
 
+  removeBoard(name){
+    this.setState((prevState) => {
+      Object.assign({}, prevState, prevState.boards = prevState.boards.filter((board) => board.name !== name))
+    })
+  }
+
   render(){
     return (
       <Switch>
-        <Route path='/:name' render={( { match } ) =>
-         <BoardContainer name={match.params.name}/>}/>
         <Route exact path='/' render={ ({history}) =>
           {return (<div>
             <HomeMessage />
@@ -66,8 +81,11 @@ export default class HomeContainer extends Component {
                 onSubmit={this.handleCreateSubmit.bind(this)}
                 onNameChange={this.handleNameInputChange.bind(this)}
                 onSizeChange={this.handleSizeInputChange.bind(this)}
+                onMonstersChange={this.handleMonstersInputChange.bind(this)}
                 name={this.state.name}
-                size={this.state.size}/>
+                size={this.state.size}
+                monsters={this.state.monsters}
+              />
               <HomeSelectForm
                 onSubmit={this.handleContinueSubmit.bind(this)}
                 onChange={this.handleSelect.bind(this)}
@@ -78,6 +96,12 @@ export default class HomeContainer extends Component {
             </div>
           </div>)
         }}/>
+        <Route exact path='/:name' render={( { match, history } ) =>
+         <BoardContainer removeBoard={this.removeBoard.bind(this)} history={history} name={match.params.name}/>}/>
+        <Route exact path='/:name/lose' render={({ match, history }) =>
+          <EndGameContainer status={'lose'} name={match} history={history}/>}/>
+        <Route exact path='/:name/win' render={({ match, history }) =>
+          <EndGameContainer status={'win'} name={match} history={history}/>}/>
       </Switch>
     )
   }

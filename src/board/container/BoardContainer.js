@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Board from '../components/Board'
 
-import { showBoard, updateBoard } from '../../api'
+import { showBoard, updateBoard, deleteBoard } from '../../api'
 
 export default class BoardContainer extends Component {
   constructor( props ) {
@@ -40,8 +40,47 @@ export default class BoardContainer extends Component {
     if (this.validMove()){
       return this.setState( (prevState) => {
         Object.assign({}, prevState.board, prevState.board.player.x = this.state.hover[0], prevState.board.player.y = this.state.hover[1], prevState.board.monsters = this.moveMonsters(this.state.board.monsters), prevState.hover = '', prevState.shading = '')
-      }, () => updateBoard(this.state.board))
+      }, () => {
+        this.pickUpKey();
+        if (this.win()) {
+          this.props.removeBoard(this.state.board.name)
+          deleteBoard(this.state.board.name)
+          .then(() => this.props.history.push('/' + this.state.board.name + '/win'))
+        }
+        else if (this.lose()) {
+          this.props.removeBoard(this.state.board.name)
+          deleteBoard(this.state.board.name)
+          .then(() => this.props.history.push('/' + this.state.board.name + '/lose'))
+        } else {
+          return updateBoard(this.state.board)
+        }
+      })
     }
+  }
+
+  pickUpKey(){
+    if (this.state.board.player.x === this.state.board.key.x && this.state.board.player.y === this.state.board.key.y ) { return this.setState( ( prevState ) =>
+    Object.assign({}, prevState.board, prevState.board.player.key = true)
+    ) }
+  }
+
+  win(){
+    if (this.state.board.player.x === this.state.board.door.x && this.state.board.player.y === this.state.board.door.y && this.state.board.player.key === true) { return true }
+    else {
+      return false
+    }
+  }
+
+  lose(){
+    for (var i = 0; i < this.state.board.monsters.length; i++) {
+      if (this.state.board.player.x === this.state.board.monsters[i].x && this.state.board.player.y === this.state.board.monsters[i].y) {
+        return 'lose'
+      }
+    }
+  }
+
+  endGame(){
+
   }
 
   moveMonsters(monsterArr){
@@ -81,7 +120,7 @@ export default class BoardContainer extends Component {
         }
       })
       boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = 'player'
-      boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = 'key'
+      if (!this.state.board.player.key) { boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = 'key'}
       boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = 'door'
       this.state.board.monsters.forEach(function(monster){
         boardArr[monster.x - 1][monster.y - 1] = 'monster'

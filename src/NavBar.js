@@ -5,7 +5,7 @@ export default () => {
     <nav className='navbar navbar-inverse'>
       <div className='container-fluid'>
         <div className='navbar-header'>
-          <a className='navbar-brand'>
+          <a href='/' className='navbar-brand'>
             Welcome to the Dungeon
           </a>
         </div>
