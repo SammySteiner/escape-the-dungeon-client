@@ -1,10 +1,10 @@
 export function fetchBoards() {
-  return fetch("http://localhost:3000/api/v1/boards")
+  return fetch("https://dry-oasis-60966.herokuapp.com/api/v1/boards")
     .then( res => res.json() )
 }
 
 export function createBoard(name, size, monsters){
-  return fetch("http://localhost:3000/api/v1/boards", {
+  return fetch("https://dry-oasis-60966.herokuapp.com/api/v1/boards", {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -16,12 +16,12 @@ export function createBoard(name, size, monsters){
 }
 
 export function showBoard(name){
-  return fetch("http://localhost:3000/api/v1/boards/" + name )
+  return fetch("https://dry-oasis-60966.herokuapp.com/api/v1/boards/" + name )
     .then( res => res.json() )
 }
 
 export function updateBoard(board){
-  return fetch("http://localhost:3000/api/v1/boards/" + board.name, {
+  return fetch("https://dry-oasis-60966.herokuapp.com/api/v1/boards/" + board.name, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export function updateBoard(board){
 }
 
 export function deleteBoard(name) {
-  return fetch("http://localhost:3000/api/v1/boards/" + name, {
+  return fetch("https://dry-oasis-60966.herokuapp.com/api/v1/boards/" + name, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'

@@ -79,10 +79,6 @@ export default class BoardContainer extends Component {
     }
   }
 
-  endGame(){
-
-  }
-
   moveMonsters(monsterArr){
     return monsterArr.map(monster => this.moveMonster(monster))
   }
@@ -119,11 +115,11 @@ export default class BoardContainer extends Component {
           row.push([''])
         }
       })
-      boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = 'player'
-      if (!this.state.board.player.key) { boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = 'key'}
-      boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = 'door'
+      boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = '👨‍💻'
+      if (!this.state.board.player.key) { boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = '🔑'}
+      boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = '🚪'
       this.state.board.monsters.forEach(function(monster){
-        boardArr[monster.x - 1][monster.y - 1] = 'monster'
+        boardArr[monster.x - 1][monster.y - 1] = '👹'
       })
       return boardArr
     }
