@@ -13,7 +13,7 @@ export default class HomeContainer extends Component {
     super()
     this.state = {
       name: '',
-      size: '',
+      size: '4',
       monsters: 0,
       select: '',
       boards: []
@@ -49,7 +49,7 @@ export default class HomeContainer extends Component {
     createBoard(this.state.name, this.state.size, this.state.monsters)
     .then(() => {
       this.props.history.push('/' + name )
-      return this.setState({name: '', size: '', monsters: 0, select: ''})
+      return this.setState({name: '', size: '4', monsters: 0, select: ''})
     })
   }
 

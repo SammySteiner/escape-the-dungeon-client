@@ -11,7 +11,7 @@ export default class EndGameContainer extends Component {
     super()
     this.state = {
       name: '',
-      size: '',
+      size: '4',
       monsters: ''
     }
   }
