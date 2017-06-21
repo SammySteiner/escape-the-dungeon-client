@@ -1,4 +1,4 @@
-const url = ENV['URL']
+const url = 'https://dry-oasis-60966.herokuapp.com/api/v1/'
 
 export function fetchBoards() {
   return fetch(url + "boards")
