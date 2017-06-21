@@ -1,15 +1,12 @@
 {
   "name": "escape-the-dungeon-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
-    "react-scripts": "1.0.6"
-  },
-  "devDependencies": {
     "react-scripts": "1.0.6"
   },
   "scripts": {
