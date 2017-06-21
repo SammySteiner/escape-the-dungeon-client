@@ -9,7 +9,7 @@ export default class BoardContainer extends Component {
     this.state = {
       board: null,
       hover: '',
-      shading: ''
+      shading: 'square'
     }
     this.handleHover = this.handleHover.bind(this)
   }
@@ -25,7 +25,7 @@ export default class BoardContainer extends Component {
     this.setState({
       hover: e.target.id.split(',').map( string => parseInt(string, 10))
 
-    }, () => this.validMove() ? this.setState({shading: 'valid move'}) : this.setState({shading: ''}))
+    }, () => this.validMove() ? this.setState({shading: 'valid-square'}) : this.setState({shading: 'square'}))
   }
 
   validMove(){
@@ -110,16 +110,15 @@ export default class BoardContainer extends Component {
       for (var i=0; i < numberOfRows; i++) {
         boardArr.push([])
       }
-      boardArr.forEach(function(row){
-        for (var i=0; i < numberOfRows; i++) {
-          row.push([''])
-        }
-      })
-      boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = '👨‍💻'
-      if (!this.state.board.player.key) { boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = '🔑'}
-      boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = '🚪'
+      boardArr[this.state.board.player.x - 1][this.state.board.player.y - 1] = 'hero-square'
+
+      if (!this.state.board.player.key) { boardArr[this.state.board.key.x - 1][this.state.board.key.y - 1] = 'key-square'}
+
+      boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = 'door-square'
+
+      if (this.state.board.player.x === this.state.board.door.x && this.state.board.player.y === this.state.board.door.y) {boardArr[this.state.board.door.x - 1][this.state.board.door.y - 1] = 'hero-door-square'}
       this.state.board.monsters.forEach(function(monster){
-        boardArr[monster.x - 1][monster.y - 1] = '👹'
+        boardArr[monster.x - 1][monster.y - 1] = 'monster-square'
       })
       return boardArr
     }

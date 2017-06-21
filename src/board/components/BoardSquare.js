@@ -5,9 +5,9 @@ export default ( props ) => {
 
 
   return(
-    <div className={`col-sm-${width} height square`}
+    <div className={`col-sm-${width} height  ${(props.hover[0] === props.x + 1 && props.hover[1] === props.y + 1) ? props.shading : 'square'}  ${props.cell}`}
       id={[props.x + 1, props.y + 1]}
       onMouseOver={props.onHover}
-      onClick={props.onClick}>{props.cell}{(props.hover[0] === props.x + 1 && props.hover[1] === props.y + 1) ? props.shading : ''}</div>
+      onClick={props.onClick}></div>
   )
 }

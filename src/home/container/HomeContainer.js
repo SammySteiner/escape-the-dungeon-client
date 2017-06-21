@@ -13,7 +13,7 @@ export default class HomeContainer extends Component {
     super()
     this.state = {
       name: '',
-      size: '4',
+      size: '6',
       monsters: 0,
       select: '',
       boards: []

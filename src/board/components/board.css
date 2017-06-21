@@ -4,4 +4,52 @@
   border-style: solid;
   border-width: 1px;
   text-align: center;
+  background: url('./max.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+}
+
+.valid-square {
+  height: 100px;
+  line-height: 100px;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+  background: url('./max.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-color: green;
+    border-width: medium;
+
+}
+
+.hero-square {
+  background: url('./hero.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.monster-square {
+  background: url('./monster.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.door-square {
+  background: url('./door.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.key-square {
+  background: url('./key.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.hero-door-square {
+  background: url('./hero-door.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }

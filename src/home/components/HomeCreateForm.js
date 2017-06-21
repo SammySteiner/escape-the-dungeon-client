@@ -12,9 +12,8 @@ export default ( props ) => {
         <label>Dungeon Size:</label>
         <div className="form-group">
           <select value={props.size} onChange={props.onSizeChange}>
-            <option value='4'>Small</option>
-            <option value='6'>Medium</option>
-            <option value='12'>Large</option>
+            <option value='6'>Easy</option>
+            <option value='12'>Hard</option>
           </select>
         </div>
         <label>Number of Monsters:</label>
