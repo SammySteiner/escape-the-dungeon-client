@@ -1,4 +1,4 @@
-const url = process.env.URL || 'http://localhost:3000/api/v1/'
+const url = ENV['URL']
 
 export function fetchBoards() {
   return fetch(url + "boards")
