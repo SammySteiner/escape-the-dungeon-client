@@ -9,13 +9,13 @@ export default ( props ) => {
         <div className="form-group">
           <input type='text' value={props.name} onChange={props.onNameChange}/>
         </div>
-        <label>Dungeon Size:</label>
+        {/* <label>Dungeon Size:</label>
         <div className="form-group">
-          <select value={props.size} onChange={props.onSizeChange}>
+          <select value={props.size} onChange={props.onSizeChange} selected='Hard'>
             <option value='6'>Easy</option>
             <option value='12'>Hard</option>
           </select>
-        </div>
+        </div> */}
         <label>Number of Monsters:</label>
         <div className="form-group">
           <input type='number' value={props.monsters} onChange={props.onMonstersChange}/>

@@ -13,8 +13,8 @@ export default class HomeContainer extends Component {
     super()
     this.state = {
       name: '',
-      size: '6',
-      monsters: 0,
+      size: '12',
+      monsters: 12,
       select: '',
       boards: []
     }
@@ -31,11 +31,11 @@ export default class HomeContainer extends Component {
     })
   }
 
-  handleSizeInputChange(e){
-    this.setState({
-      size: e.target.value
-    })
-  }
+  // handleSizeInputChange(e){
+  //   this.setState({
+  //     size: e.target.value
+  //   })
+  // }
 
   handleMonstersInputChange(e){
     this.setState({
@@ -49,7 +49,7 @@ export default class HomeContainer extends Component {
     createBoard(this.state.name, this.state.size, this.state.monsters)
     .then(() => {
       this.props.history.push('/' + name )
-      return this.setState({name: '', size: '4', monsters: 0, select: ''})
+      return this.setState({name: '', size: '12', monsters: 12, select: ''})
     })
   }
 
@@ -80,10 +80,10 @@ export default class HomeContainer extends Component {
               <HomeCreateForm
                 onSubmit={this.handleCreateSubmit.bind(this)}
                 onNameChange={this.handleNameInputChange.bind(this)}
-                onSizeChange={this.handleSizeInputChange.bind(this)}
+                // onSizeChange={this.handleSizeInputChange.bind(this)}
                 onMonstersChange={this.handleMonstersInputChange.bind(this)}
                 name={this.state.name}
-                size={this.state.size}
+                // size={this.state.size}
                 monsters={this.state.monsters}
               />
               <HomeSelectForm

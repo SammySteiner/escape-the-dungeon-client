@@ -11,8 +11,8 @@ export default class EndGameContainer extends Component {
     super()
     this.state = {
       name: '',
-      size: '4',
-      monsters: ''
+      size: '12',
+      monsters: 12
     }
   }
 
@@ -22,11 +22,11 @@ export default class EndGameContainer extends Component {
     })
   }
 
-  handleSizeInputChange(e){
-    this.setState({
-      size: e.target.value
-    })
-  }
+  // handleSizeInputChange(e){
+  //   this.setState({
+  //     size: e.target.value
+  //   })
+  // }
 
   handleMonstersInputChange(e){
     this.setState({
@@ -55,7 +55,7 @@ export default class EndGameContainer extends Component {
           <HomeCreateForm
             onSubmit={this.handleCreateSubmit.bind(this)}
             onNameChange={this.handleNameInputChange.bind(this)}
-            onSizeChange={this.handleSizeInputChange.bind(this)}
+            // onSizeChange={this.handleSizeInputChange.bind(this)}
             onMonstersChange={this.handleMonstersInputChange.bind(this)}
             name={this.state.name}
             size={this.state.size}
