@@ -1,4 +1,4 @@
-const url = 'https://dry-oasis-60966.herokuapp.com/api/v1/'
+const url = 'http://localhost:3000/api/v1/'
 
 export function fetchBoards() {
   return fetch(url + "boards")

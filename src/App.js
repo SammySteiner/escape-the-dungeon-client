@@ -6,7 +6,7 @@ import HomeContainer from './home/container/HomeContainer'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App container">
         <NavBar />
         <BrowserRouter>
           <Route path='/' render={ ( { history } ) => <HomeContainer history={history}/> }/>
