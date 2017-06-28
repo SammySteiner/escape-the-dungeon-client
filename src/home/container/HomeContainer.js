@@ -46,11 +46,17 @@ export default class HomeContainer extends Component {
   handleCreateSubmit(e){
     e.preventDefault()
     const name = this.state.name
-    createBoard(this.state.name, this.state.size, this.state.monsters)
-    .then(() => {
-      this.props.history.push('/' + name )
-      return this.setState({name: '', size: '12', monsters: 12, select: ''})
-    })
+    if (name.includes('.')) {
+      alert('Dungeon names cannot include periods.')
+    } else if (!this.state.boards.map(board=>board.name).includes(name)) {
+      createBoard(this.state.name, this.state.size, this.state.monsters)
+      .then(() => {
+        this.props.history.push('/' + name )
+        return this.setState({name: '', size: '12', monsters: 12, select: ''})
+      })
+    } else {
+      alert('That Dungeon name is already taken. Please choose another.')
+    }
   }
 
   handleSelect(e){

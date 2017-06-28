@@ -128,8 +128,8 @@ export default class BoardContainer extends Component {
   render() {
     const boardArr = this.createBoard()
     return (
-      <div className="container-fluid">
-        {this.state.board !== null ? this.state.board.name : 'Loading'}
+      <div className="container container-fluid">
+        {this.state.board !== null ? <h1>Dungeon {this.state.board.name}</h1> : 'Loading'}
         {this.state.board !== null ? <Board boardArr={boardArr}
         size={this.state.board.size}
         onHover={this.handleHover.bind(this)}
