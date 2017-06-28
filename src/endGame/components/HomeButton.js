@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom'
 export default () => {
   return (
     <div className='col-sm-6'>
-      <h3>Return to the Entrance</h3>
-      <Link to={`/`} className='btn btn-primary'>Home</Link>
+      <div className='panel panel-default'>
+        <div className='panel-heading'>
+          <h3>Return to the Entrance</h3>
+        </div>
+        <div className='panel-body'>
+          <Link to={`/`} className='btn btn-success'>Home</Link>
+        </div>
+      </div>
     </div>
   )
 }
